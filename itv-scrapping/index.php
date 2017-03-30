@@ -40,9 +40,9 @@ function findProvincesUrls(\simple_html_dom $dom)
 
     $elements = $dom->find('#tituloDesplegable li a');
     foreach ($elements as $key => $provinceLink) {
-        $link = ITV_URL.$provinceLink->href;
+        $link = ITV_URL . $provinceLink->href;
         $provinceUrls[] = $link;
-        print_r("\nProvince found: ".$link);
+        print_r("\nProvince found: " . $link);
     }
 
     return $provinceUrls;
@@ -60,8 +60,8 @@ function scrapProvinceUrls(array $provinceUrls)
         $rows = $dom->find('table tr');
         foreach ($rows as $key => $row) {
             $thirdTd = $row->children[2];
-            $link = ITV_URL.$thirdTd->find('a')[0]->href;
-            print_r("\n Single ITV found: ".$link);
+            $link = ITV_URL . $thirdTd->find('a')[0]->href;
+            print_r("\n Single ITV found: " . $link);
             $singleUrls[] = $link;
         }
     }
@@ -81,14 +81,14 @@ function getItvs(array $singleUrls)
         $province = $dom->find('span.region', 0)->plaintext;
 
         $element = array(
-        'entry' => $dom->find('h1.entry-title', 0)->plaintext,
-        'province' => $dom->find('span.region', 0)->plaintext,
-        'locality' => $dom->find('span.locality', 0)->plaintext,
-        'address' => $dom->find('span.street-address', 0)->plaintext,
-        'phone' => $dom->find('span.tel', 0)->plaintext,
-      );
+            'entry' => $dom->find('h1.entry-title', 0)->plaintext,
+            'province' => $dom->find('span.region', 0)->plaintext,
+            'locality' => $dom->find('span.locality', 0)->plaintext,
+            'address' => $dom->find('span.street-address', 0)->plaintext,
+            'phone' => $dom->find('span.tel', 0)->plaintext,
+        );
 
-        print_r("\n  ITV data found: ".json_encode($element));
+        print_r("\n  ITV data found: " . json_encode($element));
         $data[] = $element;
     }
 
